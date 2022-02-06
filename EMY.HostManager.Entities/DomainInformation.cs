@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace EMY.HostManager.Entities
 {
     [Table("tblDomainInformations")]
-    public class DomainInformation : BaseEntity
+    public class domainInformation : BaseEntity
     {
         [Key]
         public int DomainInformationID { get; set; }

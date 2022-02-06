@@ -32,9 +32,9 @@ namespace EMY.HostManager.Bussines.Concrete
             return result;
         }
 
-        public override async Task<ServerInformation> GetServerInformationByServerInformationID(int ServerInformationID)
+        public override async Task<ServerInformation> GetServerInformationByServerInformationID(int serverInformationID)
         {
-            var Result = await repository.GetByPrimaryKey(ServerInformationID);
+            var Result = await repository.GetByPrimaryKey(serverInformationID);
             return Result;
         }
 

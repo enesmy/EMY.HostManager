@@ -76,21 +76,21 @@
                     <div style="display:block;width:80px;">
                         @if (User.IsInRole("ServerUp") || User.IsInRole("AdminFull") || User.IsInRole("ServerFull"))
                         {
-                            <a href="/Server/Edit?ServerInformationID=@item.ServerInformationID">
+                            <a asp-controller="Server" asp-action="Edit" asp-route-serverInformationID="@item.ServerInformationID">
                                 <i class="lni lni-slice"></i>
                             </a>
                             @Html.Raw(" | ");
                         }
                         @if (User.IsInRole("ServerShow") || User.IsInRole("AdminFull") || User.IsInRole("ServerFull"))
                         {
-                            <a href="/Server/Details?ServerInformationID=@item.ServerInformationID">
+                            <a asp-controller="Server" asp-action="Details" asp-route-serverInformationID="@item.ServerInformationID">
                                 <i class="lni lni-question-circle"></i>
                             </a>
                             @Html.Raw(" | ");
                         }
                         @if (User.IsInRole("ServerDel") || User.IsInRole("AdminFull") || User.IsInRole("ServerFull"))
                         {
-                            <a href="/Server/Delete?ServerInformationID=@item.ServerInformationID">
+                            <a asp-controller="Server" asp-action="Delete" asp-route-serverInformationID="@item.ServerInformationID">
                                 <i class="lni lni-circle-minus"></i>
                             </a>
                         }

@@ -7,7 +7,7 @@ namespace EMY.HostManager.Bussines.Abstract
 {
     public abstract class AbstractTemplateService
     {
-        public abstract Task<Template> GetByTeplateID(int TeplateID);
+        public abstract Task<Template> GetByTeplateID(int teplateID);
         public abstract Task<IEnumerable<Template>> GetAll();
         public abstract Task Add(Template newTemplate, int adderRef);
         public abstract Task Update(Template template, int updaterRef);
@@ -29,7 +29,7 @@ namespace EMY.HostManager.Bussines.Abstract
                 throw new Exception("Undefined exception!");
             }
         }
-        public abstract Task Delete(int ID, int DeleterRef);
+        public abstract Task Delete(int id, int deleterRef);
         public abstract Task<Template> GetByTemplateName(string templateName);
     }
 }

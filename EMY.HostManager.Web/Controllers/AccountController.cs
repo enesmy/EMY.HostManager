@@ -134,10 +134,10 @@ namespace EMY.HostManager.Web.Controllers
             return View(user);
         }
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme), HttpPost]
-        public async Task<IActionResult> ChangeMyPassword(string OldPassword, string newPassword)
+        public async Task<IActionResult> ChangeMyPassword(string oldPassword, string newPassword)
         {
             var me = await factory.Users.GetByUserID(int.Parse(User.Identity.Name));
-            if (me.PasswordControl(OldPassword))
+            if (me.PasswordControl(oldPassword))
             {
                 await factory.Users.ChangePassword(int.Parse(User.Identity.Name), newPassword);
                 return Ok("Password changed!");
@@ -165,11 +165,11 @@ namespace EMY.HostManager.Web.Controllers
         }
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "AdminFull")]
-        public async Task<IActionResult> RoleManager(int UserID)
+        public async Task<IActionResult> RoleManager(int userID)
         {
-            var userroles = await factory.Users.GetAllRoles(UserID);
-            ViewBag.UserID = UserID;
-            var user = await factory.Users.GetByUserID(UserID);
+            var userroles = await factory.Users.GetAllRoles(userID);
+            ViewBag.UserID = userID;
+            var user = await factory.Users.GetByUserID(userID);
             ViewBag.User = user.GetName;
             return View(userroles.ToList());
         }
@@ -195,48 +195,48 @@ namespace EMY.HostManager.Web.Controllers
         }
 
         [HttpGet, Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "AdminFull")]
-        public async Task<IActionResult> Activate(int UserID)
+        public async Task<IActionResult> Activate(int userID)
         {
-            await factory.Users.Activate(UserID, int.Parse(User.Identity.Name));
+            await factory.Users.Activate(userID, int.Parse(User.Identity.Name));
             return Redirect("UserList");
 
         }
 
         [HttpGet, Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "AdminFull")]
-        public async Task<IActionResult> DeActivate(int UserID)
+        public async Task<IActionResult> DeActivate(int userID)
         {
-            await factory.Users.DeActivate(UserID, int.Parse(User.Identity.Name));
+            await factory.Users.DeActivate(userID, int.Parse(User.Identity.Name));
             return Redirect("UserList");
 
         }
 
         [HttpGet, Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "AdminFull")]
-        public async Task<IActionResult> ResetPassword(int UserID)
+        public async Task<IActionResult> ResetPassword(int userID)
         {
-            await factory.Users.ChangePassword(UserID, "123456");
+            await factory.Users.ChangePassword(userID, "123456");
             return Redirect("UserList");
         }
         [HttpPost]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "AdminFull")]
-        public async Task<IActionResult> AddRole(int UserID, string FormName, AuthType rollType)
+        public async Task<IActionResult> AddRole(int userID, string formName, AuthType rollType)
         {
 
-            bool existRole = await factory.Users.CheckRoleIsExist(UserID, FormName, rollType);
+            bool existRole = await factory.Users.CheckRoleIsExist(userID, formName, rollType);
             if (existRole) return ValidationProblem("Role already exist in system!");
             var authrole = new UserRole()
             {
-                FormName = FormName,
+                FormName = formName,
                 AuthorizeType = rollType,
-                UserID = UserID
+                UserID = userID
             };
-            await factory.Users.AddRole(authrole, UserID);
+            await factory.Users.AddRole(authrole, userID);
             return Ok("Role added!");
         }
         [HttpPost]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "AdminFull")]
-        public async Task<IActionResult> DeleteRole(int UserID, string FormName, AuthType rollType)
+        public async Task<IActionResult> DeleteRole(int userID, string formName, AuthType rollType)
         {
-            await factory.Users.RemoveRole(UserID, FormName, rollType, int.Parse(User.Identity.Name));
+            await factory.Users.RemoveRole(userID, formName, rollType, int.Parse(User.Identity.Name));
             return Ok("Role Deleted!");
         }
 

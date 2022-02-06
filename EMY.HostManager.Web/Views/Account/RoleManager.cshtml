@@ -119,22 +119,22 @@
 
 
         if (result) {
-            checked(obj.dataset.formname, obj.dataset.authtype, userID, 'AddRole');
+            apply(obj.dataset.formname, obj.dataset.authtype, userID, 'AddRole');
         }
         else {
-            checked(obj.dataset.formname, obj.dataset.authtype, userID,'DeleteRole');
+            apply(obj.dataset.formname, obj.dataset.authtype, userID,'DeleteRole');
         }
     }
 
-    function checked(formName,roleType,uid,method) {
+    function apply(formName,roleType,uid,method) {
 
         $.ajax({
             url: "/Account/"+method,
             type: "POST",
             data:
             {
-                UserID: uid,
-                FormName: formName,
+                userID: uid,
+                formName: formName,
                 rollType: roleType
             },
             success: function (data) {
@@ -145,10 +145,7 @@
 
         });
     }
-
-    function unchecked(id, uid) {
-
-    }
+      
 
     function getParams(url) {
         var params = {};

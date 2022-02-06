@@ -56,7 +56,7 @@
         </dd>
 
     </dl>
-    <button class="btn  btn-primary" onclick="StartProcess();" type="button" id="btnRun">
+    <button class="btn btn-primary" onclick="StartProcess();" type="button" id="btnRun">
         <i class="lni lni-save"></i> Save Changes
     </button>
     <br />
@@ -83,7 +83,7 @@
 
     function StartProcess() {
         if (setPasswordConfirmValidity()) {
-            const OldPassword = document.getElementById('OldPassword').value;
+            const oldPassword = document.getElementById('OldPassword').value;
             const newPassword = document.getElementById('newPassword').value;
 
 
@@ -92,7 +92,7 @@
                 type: "POST",
                 data:
                 {
-                    OldPassword: OldPassword,
+                    oldPassword: oldPassword,
                     newPassword: newPassword
                 },
                 success: function (data) {

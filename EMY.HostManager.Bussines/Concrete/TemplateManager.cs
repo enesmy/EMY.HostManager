@@ -23,9 +23,9 @@ namespace EMY.HostManager.Bussines.Concrete
             await repository.Add(newTemplate, adderRef);
         }
 
-        public override async Task Delete(int ID, int DeleterRef)
+        public override async Task Delete(int id, int DeleterRef)
         {
-            await repository.Remove(ID, DeleterRef);
+            await repository.Remove(id, DeleterRef);
         }
 
         public override async Task<IEnumerable<Template>> GetAll()
@@ -40,9 +40,9 @@ namespace EMY.HostManager.Bussines.Concrete
             return result;
         }
 
-        public override async Task<Template> GetByTeplateID(int TeplateID)
+        public override async Task<Template> GetByTeplateID(int teplateID)
         {
-            var result = await repository.GetByPrimaryKey(TeplateID);
+            var result = await repository.GetByPrimaryKey(teplateID);
             return result;
         }
 

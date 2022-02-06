@@ -1,6 +1,4 @@
-﻿
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace EMY.HostManager.Bussines
 {
@@ -93,7 +91,7 @@ namespace EMY.HostManager.Bussines
             return true;
         }
 
-        public bool RunSSHCode(string Code, ref string resultmessage)
+        public bool RunSSHCode(string code, ref string resultmessage)
         {
             Chilkat.Ssh ssh = new Chilkat.Ssh();
 
@@ -116,7 +114,7 @@ namespace EMY.HostManager.Bussines
             }
 
             //  Send some commands and get the output.
-            resultmessage = ssh.QuickCommand(Code, "ansi");
+            resultmessage = ssh.QuickCommand(code, "ansi");
             if (ssh.LastMethodSuccess != true)
             {
                 Debug.WriteLine(ssh.LastErrorText);

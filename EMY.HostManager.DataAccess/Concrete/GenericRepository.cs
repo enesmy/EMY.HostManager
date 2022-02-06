@@ -39,11 +39,11 @@ namespace EMY.HostManager.DataAccess.Concrete
             return result;
         }
 
-        async Task IAsyncRepository<T>.Add(T entity, int UserRef)
+        async Task IAsyncRepository<T>.Add(T entity, int userRef)
         {
             if (entity is BaseEntity b)
             {
-                b.CreatorID = b.LastUpdaterID = UserRef;
+                b.CreatorID = b.LastUpdaterID = userRef;
                 b.CreatedDate = b.LastUpdateDate = DateTime.Now;
                 b.IsDeleted = false;
             }

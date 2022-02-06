@@ -35,37 +35,37 @@ namespace EMY.HostManager.Web.Controllers
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "TemplateUp,TemplateFull,AdminFull")]
-        public async Task<IActionResult> Edit(int TemplateID)
+        public async Task<IActionResult> Edit(int templateID)
         {
             ViewBag.Error = false;
             ViewBag.ErrorMessage = "";
-            Template template = await factory.Templates.GetByTeplateID(TemplateID);
+            Template template = await factory.Templates.GetByTeplateID(templateID);
             return View("CreateOrUpdate", template);
         }
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "TemplateShow,TemplateFull,AdminFull")]
-        public async Task<IActionResult> Details(int TemplateID)
+        public async Task<IActionResult> Details(int templateID)
         {
-            Template template = await factory.Templates.GetByTeplateID(TemplateID);
+            Template template = await factory.Templates.GetByTeplateID(templateID);
             if (template == null) return NotFound();
             return View(template);
         }
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "TemplateDel,TemplateFull,AdminFull")]
-        public async Task<IActionResult> Delete(int TemplateID)
+        public async Task<IActionResult> Delete(int templateID)
         {
-            Template template = await factory.Templates.GetByTeplateID(TemplateID);
+            Template template = await factory.Templates.GetByTeplateID(templateID);
             if (template == null) return NotFound();
             return View(template);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "TemplateDel,TemplateFull,AdminFull")]
-        public async Task<IActionResult> DeleteConfirmed(int TemplateID)
+        public async Task<IActionResult> DeleteConfirmed(int templateID)
         {
-            Template template = await factory.Templates.GetByTeplateID(TemplateID);
+            Template template = await factory.Templates.GetByTeplateID(templateID);
             if (template == null) return NotFound();
             await factory.Templates.Delete(template, int.Parse(User.Identity.Name));
             return Redirect("Index");

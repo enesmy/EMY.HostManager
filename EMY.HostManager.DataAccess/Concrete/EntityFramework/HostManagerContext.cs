@@ -56,11 +56,11 @@ namespace EMY.HostManager.DataAccess.Concrete.EntityFramework
         /// Release connection
         /// </summary>
         /// <param name="system">Database system</param>
-        /// <param name="ConnectionString">Connection string</param>
-        public HostManagerContext(DatabaseSystem system, string ConnectionString)
+        /// <param name="connectionString">Connection string</param>
+        public HostManagerContext(DatabaseSystem system, string connectionString)
         {
             dbSysem = system;
-            ConnectionStringProp = ConnectionString;
+            ConnectionStringProp = connectionString;
         }
         #endregion
 
@@ -71,7 +71,7 @@ namespace EMY.HostManager.DataAccess.Concrete.EntityFramework
         public DbSet<TemplateParameter> TemplateParameters { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<DomainInformation> Domains { get; set; }
+        public DbSet<domainInformation> Domains { get; set; }
 
         #endregion
 

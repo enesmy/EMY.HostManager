@@ -1,4 +1,4 @@
-﻿@model EMY.HostManager.Entities.DomainInformation
+﻿@model EMY.HostManager.Entities.domainInformation
 
 @{
     ViewData["Title"] = "Details";
@@ -35,7 +35,7 @@
 <div>
     @if (User.IsInRole("DomainUp") || User.IsInRole("AdminFull") || User.IsInRole("DomainFull"))
     {
-        <a href="/Domain/Edit?ServerInformationID=@Model.DomainInformationID" class="btn btn-light">
+        <a asp-controller="Domain" asp-action="Edit" asp-route-domainInformationID="@Model.DomainInformationID" class="btn btn-sm btn-light">
             <i class="lni lni-slice"> Edit</i>
         </a>
     }

@@ -31,17 +31,17 @@ namespace EMY.HostManager.Web.Controllers
         {
             ViewBag.Error = false;
             ViewBag.ErrorMessage = "";
-            DomainInformation newDomain = new DomainInformation();
+            domainInformation newDomain = new domainInformation();
             return View("CreateOrUpdate", newDomain);
         }
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "DomainUp,DomainFull,AdminFull")]
-        public async Task<IActionResult> Edit(int DomainInformationID)
+        public async Task<IActionResult> Edit(int domainInformationID)
         {
             ViewBag.Error = false;
             ViewBag.ErrorMessage = "";
-            DomainInformation domain = await factory.Domains.GetDomainInformationByDomainInformationID(DomainInformationID);
+            domainInformation domain = await factory.Domains.GetDomainInformationByDomainInformationID(domainInformationID);
             if (domain == null)
                 return NotFound();
             return View("CreateOrUpdate", domain);
@@ -49,9 +49,9 @@ namespace EMY.HostManager.Web.Controllers
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "DomainShow,DomainFull,AdminFull")]
-        public async Task<IActionResult> Details(int DomainInformationID)
+        public async Task<IActionResult> Details(int domainInformationID)
         {
-            DomainInformation domain = await factory.Domains.GetDomainInformationByDomainInformationID(DomainInformationID);
+            domainInformation domain = await factory.Domains.GetDomainInformationByDomainInformationID(domainInformationID);
             if (domain == null)
                 return NotFound();
             return View(domain);
@@ -59,9 +59,9 @@ namespace EMY.HostManager.Web.Controllers
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "DomainDel,DomainFull,AdminFull")]
-        public async Task<IActionResult> Delete(int DomainInformationID)
+        public async Task<IActionResult> Delete(int domainInformationID)
         {
-            DomainInformation domain = await factory.Domains.GetDomainInformationByDomainInformationID(DomainInformationID);
+            domainInformation domain = await factory.Domains.GetDomainInformationByDomainInformationID(domainInformationID);
             if (domain == null)
                 return NotFound();
             return View(domain);
@@ -69,9 +69,9 @@ namespace EMY.HostManager.Web.Controllers
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "AdminFull")]
-        public async Task<IActionResult> Run(int DomainInformationID)
+        public async Task<IActionResult> Run(int domainInformationID)
         {
-            DomainInformation domain = await factory.Domains.GetDomainInformationByDomainInformationID(DomainInformationID);
+            domainInformation domain = await factory.Domains.GetDomainInformationByDomainInformationID(domainInformationID);
             if (domain == null)
                 return NotFound();
 
@@ -88,17 +88,17 @@ namespace EMY.HostManager.Web.Controllers
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "AdminFull")]
-        public async Task<IActionResult> Upload(int DomainInformationID, int TemplateID, int ServerInformationID)
+        public async Task<IActionResult> Upload(int domainInformationID, int templateID, int serverInformationID)
         {
-            var domain = await factory.Domains.GetDomainInformationByDomainInformationID(DomainInformationID);
+            var domain = await factory.Domains.GetDomainInformationByDomainInformationID(domainInformationID);
             if (domain == null)
                 return NotFound("Domain information not found in database!");
 
-            var template = await factory.Templates.GetByTeplateID(TemplateID);
+            var template = await factory.Templates.GetByTeplateID(templateID);
             if (template == null)
                 return NotFound("Template information not found in database!");
 
-            var server = await factory.ServerInformations.GetServerInformationByServerInformationID(ServerInformationID);
+            var server = await factory.ServerInformations.GetServerInformationByServerInformationID(serverInformationID);
             if (server == null)
                 return NotFound("Server information not found in database!");
 
@@ -122,22 +122,22 @@ namespace EMY.HostManager.Web.Controllers
         }
         [HttpPost]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "AdminFull")]
-        public async Task<IActionResult> ServiceTest(int ServerInformationID)
+        public async Task<IActionResult> ServiceTest(int serverInformationID)
         {
-            return await RunSSH(ServerInformationID, "nginx -t");
+            return await RunSSH(serverInformationID, "nginx -t");
         }
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "AdminFull")]
-        public async Task<IActionResult> ServiceReload(int ServerInformationID)
+        public async Task<IActionResult> ServiceReload(int serverInformationID)
         {
-            return await RunSSH(ServerInformationID, "nginx -s reload");
+            return await RunSSH(serverInformationID, "nginx -s reload");
 
         }
 
-        private async Task<IActionResult> RunSSH(int ServerInformationID, string sshCode)
+        private async Task<IActionResult> RunSSH(int serverInformationID, string sshCode)
         {
-            var server = await factory.ServerInformations.GetServerInformationByServerInformationID(ServerInformationID);
+            var server = await factory.ServerInformations.GetServerInformationByServerInformationID(serverInformationID);
             if (server == null)
                 return NotFound();
             SshSystem ssh = new SshSystem(server.ServerAdress, server.UserName, server.Password, server.Port);
@@ -148,9 +148,9 @@ namespace EMY.HostManager.Web.Controllers
 
         [HttpGet, ValidateAntiForgeryToken]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "DomainDel,DomainFull,AdminFull")]
-        public async Task<IActionResult> DeleteConfirmed(int DomainInformationID)
+        public async Task<IActionResult> DeleteConfirmed(int domainInformationID)
         {
-            DomainInformation domain = await factory.Domains.GetDomainInformationByDomainInformationID(DomainInformationID);
+            domainInformation domain = await factory.Domains.GetDomainInformationByDomainInformationID(domainInformationID);
             if (domain == null)
                 return NotFound();
 
@@ -160,7 +160,7 @@ namespace EMY.HostManager.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(DomainInformation domain)
+        public async Task<IActionResult> Save(domainInformation domain)
         {
             ViewBag.Error = true;
 

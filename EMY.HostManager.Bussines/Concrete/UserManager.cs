@@ -23,18 +23,18 @@ namespace EMY.HostManager.Bussines.Concrete
             await repository.Add(newUser, adderRef);
         }
 
-        public override async Task DeActivate(int UserID, int DeactivaterRef)
+        public override async Task DeActivate(int userID, int deactivaterRef)
         {
-            var res = await GetByUserID(UserID);
+            var res = await GetByUserID(userID);
             res.IsActive = false;
-            await repository.Update(res, DeactivaterRef);
+            await repository.Update(res, deactivaterRef);
         }
 
-        public override async Task Activate(int UserID, int ActivaterRef)
+        public override async Task Activate(int userID, int activaterRef)
         {
-            var res = await GetByUserID(UserID);
+            var res = await GetByUserID(userID);
             res.IsActive = true;
-            await repository.Update(res, ActivaterRef);
+            await repository.Update(res, activaterRef);
         }
 
         public override async Task<IEnumerable<User>> GetAll()
@@ -43,9 +43,9 @@ namespace EMY.HostManager.Bussines.Concrete
             return result;
         }
 
-        public override async Task<User> GetByUserID(int UserID)
+        public override async Task<User> GetByUserID(int userID)
         {
-            var result = await repository.GetByPrimaryKey(UserID);
+            var result = await repository.GetByPrimaryKey(userID);
             return result;
         }
 
@@ -54,11 +54,11 @@ namespace EMY.HostManager.Bussines.Concrete
             await repository.Update(user, updaterRef);
         }
 
-        public override async Task<IEnumerable<string>> GetAllRoles(int UserID)
+        public override async Task<IEnumerable<string>> GetAllRoles(int userID)
         {
-            var user = await repository.GetByPrimaryKey(UserID);
+            var user = await repository.GetByPrimaryKey(userID);
             if (user == null || !user.IsActive || user.IsDeleted) return (new string[] { });
-            var AllRoles = await userRoleRepository.GetWhere(o => !o.IsDeleted && o.UserID == UserID);
+            var AllRoles = await userRoleRepository.GetWhere(o => !o.IsDeleted && o.UserID == userID);
             List<string> roles = new List<string>();
             return AllRoles.ToList().Select(o => o.GetAuthCode);
         }
@@ -69,9 +69,9 @@ namespace EMY.HostManager.Bussines.Concrete
         }
 
 
-        public override async Task ClearAllRoles(int UserID, int removerRef)
+        public override async Task ClearAllRoles(int userID, int removerRef)
         {
-            var roles = await userRoleRepository.GetWhere(o => !o.IsDeleted && o.UserID == UserID);
+            var roles = await userRoleRepository.GetWhere(o => !o.IsDeleted && o.UserID == userID);
             foreach (var role in roles)
             {
                 await userRoleRepository.Remove(role.UserRoleID, removerRef);
@@ -107,16 +107,16 @@ namespace EMY.HostManager.Bussines.Concrete
             return resultModel;
         }
 
-        public override async Task RemoveRole(int UserID, string FormName, AuthType type, int removerRef)
+        public override async Task RemoveRole(int userID, string formName, AuthType type, int removerRef)
         {
-            var AllRoles = await userRoleRepository.GetWhere(o => !o.IsDeleted && o.UserID == UserID && o.AuthorizeType == type && o.FormName == FormName);
+            var AllRoles = await userRoleRepository.GetWhere(o => !o.IsDeleted && o.UserID == userID && o.AuthorizeType == type && o.FormName == formName);
             if (AllRoles.Count() > 0)
                 await userRoleRepository.Remove(AllRoles.First().UserRoleID, removerRef);
         }
 
-        public override async Task ChangePassword(int UserID, string newPassword)
+        public override async Task ChangePassword(int userID, string newPassword)
         {
-            var currentUser = await repository.FirstOrDefault(o => o.UserID == UserID);
+            var currentUser = await repository.FirstOrDefault(o => o.UserID == userID);
             if (currentUser != null)
             {
                 currentUser.Password = newPassword;
@@ -124,9 +124,9 @@ namespace EMY.HostManager.Bussines.Concrete
             }
         }
 
-        public override async Task<bool> CheckRoleIsExist(int UserID, string FormName, AuthType type)
+        public override async Task<bool> CheckRoleIsExist(int userID, string formName, AuthType type)
         {
-            var AllRoles = await userRoleRepository.GetWhere(o => !o.IsDeleted && o.UserID == UserID && o.AuthorizeType == type && o.FormName == FormName);
+            var AllRoles = await userRoleRepository.GetWhere(o => !o.IsDeleted && o.UserID == userID && o.AuthorizeType == type && o.FormName == formName);
             return (AllRoles.Count() > 0);
 
         }

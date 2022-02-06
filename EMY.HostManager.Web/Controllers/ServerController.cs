@@ -38,11 +38,11 @@ namespace EMY.HostManager.Web.Controllers
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "ServerUp,ServerFull,AdminFull")]
-        public async Task<IActionResult> Edit(int ServerInformationID)
+        public async Task<IActionResult> Edit(int serverInformationID)
         {
             ViewBag.Error = false;
             ViewBag.ErrorMessage = "";
-            ServerInformation existServer = await factory.ServerInformations.GetServerInformationByServerInformationID(ServerInformationID);
+            ServerInformation existServer = await factory.ServerInformations.GetServerInformationByServerInformationID(serverInformationID);
             if (existServer == null)
                 return NotFound();
             return View("CreateOrUpdate", existServer);
@@ -97,9 +97,9 @@ namespace EMY.HostManager.Web.Controllers
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "ServerShow,ServerFull,AdminFull")]
-        public async Task<IActionResult> Details(int ServerInformationID)
+        public async Task<IActionResult> Details(int serverInformationID)
         {
-            ServerInformation existServer = await factory.ServerInformations.GetServerInformationByServerInformationID(ServerInformationID);
+            ServerInformation existServer = await factory.ServerInformations.GetServerInformationByServerInformationID(serverInformationID);
             if (existServer == null)
                 return NotFound();
             return View(existServer);
@@ -107,9 +107,9 @@ namespace EMY.HostManager.Web.Controllers
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "ServerDel,ServerFull,AdminFull")]
-        public async Task<IActionResult> Delete(int ServerInformationID)
+        public async Task<IActionResult> Delete(int serverInformationID)
         {
-            ServerInformation existServer = await factory.ServerInformations.GetServerInformationByServerInformationID(ServerInformationID);
+            ServerInformation existServer = await factory.ServerInformations.GetServerInformationByServerInformationID(serverInformationID);
             if (existServer == null)
                 return NotFound();
             return View(existServer);
@@ -118,9 +118,9 @@ namespace EMY.HostManager.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(AuthenticationSchemes = SystemStatics.DefaultScheme, Roles = "ServerDel,ServerFull,AdminFull")]
-        public async Task<IActionResult> DeleteConfirmed(int ServerInformationID)
+        public async Task<IActionResult> DeleteConfirmed(int serverInformationID)
         {
-            ServerInformation existServer = await factory.ServerInformations.GetServerInformationByServerInformationID(ServerInformationID);
+            ServerInformation existServer = await factory.ServerInformations.GetServerInformationByServerInformationID(serverInformationID);
             if (existServer == null)
                 return NotFound();
 

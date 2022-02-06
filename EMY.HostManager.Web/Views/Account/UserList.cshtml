@@ -65,21 +65,23 @@
                 <td>
                     @if (!item.IsActive)
                     {
-                        <a class="btn btn-sm btn-success" href="/Account/Activate?UserID=@item.UserID">
+                        <a class="btn btn-sm btn-success" asp-controller="Account" asp-action="Activate" asp-route-userID="@item.UserID">
                             <i class="lni lni-unlock"></i> Unlock Account
                         </a>
                     }
                     else
                     {
-                        <a class="btn btn-sm btn-danger" href="/Account/DeActivate?UserID=@item.UserID">
+                        <a class="btn btn-sm btn-danger" asp-controller="Account" asp-action="DeActivate" asp-route-userID="@item.UserID">
                             <i class="lni lni-lock-alt"></i> Lock Account
                         </a>
                     }
 
-                    | <a class="btn btn-sm btn-info" href="/Account/ResetPassword?UserID=@item.UserID">
+                    |
+                    <a class="btn btn-sm btn-info" asp-controller="Account" asp-action="ResetPassword" asp-route-userID="@item.UserID">
                         <i class="lni lni-reload"></i> Reset Password(123456)
-                    </a>
-                    | <a class="btn btn-sm btn-dark" href="/Account/RoleManager?UserID=@item.UserID">
+                    </a>  |
+
+                    <a class="btn btn-sm btn-dark" asp-controller="Account" asp-action="RoleManager" asp-route-userID="@item.UserID">
                         <i class="lni lni-checkmark-circle"></i> Authorizes
                     </a>
                 </td>

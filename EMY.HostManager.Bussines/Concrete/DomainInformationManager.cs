@@ -12,42 +12,42 @@ namespace EMY.HostManager.Bussines.Concrete
     public class DomainInformationManager : AbstractDomainService
     {
 
-        private IAsyncRepository<DomainInformation> repository = null;
+        private IAsyncRepository<domainInformation> repository = null;
         public DomainInformationManager(DbContext context)
         {
-            this.repository = new GenericRepository<DomainInformation>(context);
+            this.repository = new GenericRepository<domainInformation>(context);
         }
-        public override async Task Add(DomainInformation domainInformation, int adderRef)
+        public override async Task Add(domainInformation domainInformation, int adderRef)
         {
             await repository.Add(domainInformation, adderRef);
         }
 
-        public override async Task Delete(DomainInformation domainInformation, int deleterRef)
+        public override async Task Delete(domainInformation domainInformation, int deleterRef)
         {
             await repository.Remove(domainInformation.DomainInformationID, deleterRef);
         }
 
-        public override async Task<DomainInformation> GetDomainByName(string DomainName)
+        public override async Task<domainInformation> GetDomainByName(string domainName)
         {
-            var result = await repository.FirstOrDefault(o => o.DomainName == DomainName && !o.IsDeleted);
+            var result = await repository.FirstOrDefault(o => o.DomainName == domainName && !o.IsDeleted);
             return result;
         }
 
-        public override async Task<DomainInformation> GetDomainInformationByDomainInformationID(int DomainInformationID)
+        public override async Task<domainInformation> GetDomainInformationByDomainInformationID(int domainInformationID)
         {
-            var result = await repository.GetByPrimaryKey(DomainInformationID);
+            var result = await repository.GetByPrimaryKey(domainInformationID);
             return result;
         }
 
-        public override async Task<IEnumerable<DomainInformation>> GetDomainList()
+        public override async Task<IEnumerable<domainInformation>> GetDomainList()
         {
             var result = await repository.GetWhere(o => !o.IsDeleted);
             return result;
         }
 
-        public override async Task Update(DomainInformation DomainInformation, int updaterRef)
+        public override async Task Update(domainInformation domainInformation, int updaterRef)
         {
-            await repository.Update(DomainInformation, updaterRef);
+            await repository.Update(domainInformation, updaterRef);
         }
     }
 }

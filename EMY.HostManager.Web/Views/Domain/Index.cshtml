@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EMY.HostManager.Entities.DomainInformation>
+﻿@model IEnumerable<EMY.HostManager.Entities.domainInformation>
 
 @{
     ViewData["Title"] = "Domain List";
@@ -65,19 +65,19 @@
                 <td>
                     @if (User.IsInRole("DomainUp") || User.IsInRole("AdminFull") || User.IsInRole("DomainFull"))
                     {
-                        <a href="/Domain/Edit?DomainInformationID=@item.DomainInformationID">
+                        <a asp-controller="Domain" asp-action="Edit" asp-route-domainInformationID="@item.DomainInformationID">
                             <i class="lni lni-slice"></i>
                         </a>
                     }
                     @if (User.IsInRole("DomainShow") || User.IsInRole("AdminFull") || User.IsInRole("DomainFull"))
                     {
-                        <a href="/Domain/Details?DomainInformationID=@item.DomainInformationID">
+                        <a asp-controller="Domain" asp-action="Details" asp-route-domainInformationID="@item.DomainInformationID">
                             <i class="lni lni-question-circle"></i>
                         </a>
                     }
                     @if (User.IsInRole("DomainDel") || User.IsInRole("AdminFull") || User.IsInRole("DomainFull"))
                     {
-                        <a href="/Domain/Delete?DomainInformationID=@item.DomainInformationID">
+                        <a asp-controller="Domain" asp-action="Delete" asp-route-domainInformationID="@item.DomainInformationID">
                             <i class="lni lni-circle-minus"></i>
                         </a>
                     }

@@ -59,7 +59,7 @@
 <div>
     @if (User.IsInRole("ServerUp") || User.IsInRole("AdminFull") || User.IsInRole("ServerFull"))
     {
-        <a href="/Server/Edit?ServerInformationID=@Model.ServerInformationID" class="btn btn-light">
+        <a asp-controller="Server" asp-action="Edit" asp-route-serverInformationID="@Model.ServerInformationID" class="btn btn-light">
             <i class="lni lni-slice"> Edit</i>
         </a>
     }

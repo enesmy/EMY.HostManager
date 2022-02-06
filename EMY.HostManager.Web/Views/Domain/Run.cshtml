@@ -1,4 +1,4 @@
-﻿@model EMY.HostManager.Entities.DomainInformation
+﻿@model EMY.HostManager.Entities.domainInformation
 
 @{
     ViewData["Title"] = "Details";
@@ -23,11 +23,11 @@
 
 </div>
 
-<button class="btn  btn-primary bosluk" onclick="StartProcess();" type="button" id="btnRun">
+<button class="btn btn-primary" onclick="StartProcess();" type="button" id="btnRun">
     <i class="lni lni-cloud-upload"></i> Upload
 </button>
 
-<div class="alert alert-danger bosluk" id="errorMessage" style="display:none;"> Please select a template and server!</div>
+<div class="alert alert-danger" id="errorMessage" style="display:none;"> Please select a template and server!</div>
 
 <div id="general">
 
@@ -72,9 +72,9 @@
             type: "POST",
             data:
             {
-                DomainInformationID: domainref,
-                TemplateID: templateref,
-                ServerInformationID: serverref
+                domainInformationID: domainref,
+                templateID: templateref,
+                serverInformationID: serverref
             },
             success: function (data) {
                 $("#general").html('<br><div class="alert alert-info" id="FirstResult">Conf Uploaded : <b>' + data + '</b></div>');
@@ -94,7 +94,7 @@
             type: "POST",
             data:
             {
-                ServerInformationID: serverref
+                serverInformationID: serverref
             },
             success: function (data) {
 
@@ -114,7 +114,7 @@
             type: "POST",
             data:
             {
-                ServerInformationID: serverref
+                serverInformationID: serverref
             },
             success: function (data) {
 
